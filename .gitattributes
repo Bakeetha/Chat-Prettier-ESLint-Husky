@@ -1,0 +1,2 @@
+# Force LF line endings for .vscode/launch.json
+.vscode/launch.json text eol=lf

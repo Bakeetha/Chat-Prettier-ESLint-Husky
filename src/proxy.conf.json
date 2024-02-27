@@ -1,0 +1,7 @@
+{
+  "/socket.io": {
+    "target": "http://10.10.11.226:3000",
+    "secure": false,
+    "changeOrigin": true
+  }
+}

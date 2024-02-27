@@ -1,0 +1,85 @@
+<div class="message-container">
+  <div class="message-container-wrap" #containerBody>
+    <div
+      *ngFor="let message of messages"
+      class="message"
+      [ngClass]="{
+        to: message.sender === currentPort,
+        from: message.sender !== currentPort
+      }">
+      <span *ngIf="!isImage(message)">{{ message.content }}</span>
+      <!-- Display the image if the message is an image -->
+      <img
+        *ngIf="isImage(message)"
+        [src]="message.content"
+        alt="Image"
+        style="width: 100%; padding: 10px" />
+      <!-- Display the image if the message is an image -->
+      <!-- <img *ngIf="isImage(message)" [src]="sanitizeImage(message.content)" alt="Image" style="width: 100%;"/> -->
+    </div>
+  </div>
+
+  <div class="message-input">
+    <div class="wrap">
+      <!-- <input type="text" #msgInput [(ngModel)]="message" placeholder="Type a message..." (keyup.enter)="sendMessage()"> -->
+      <!-- Add file input for attaching files -->
+      <input
+        type="file"
+        #fileInput
+        (change)="onFileSelected($event)"
+        accept="image/*"
+        style="display: none" />
+      <input
+        type="text"
+        #msgInput
+        formControlName="message"
+        placeholder="Type a message..."
+        (keyup.enter)="sendMessage(message)" />
+      <!-- [(ngModel)]="message" -->
+      <i
+        class="fa fa-paperclip attachment"
+        aria-hidden="true"
+        (click)="fileInput.click()"></i>
+
+      <!-- <i class="fa fa-paperclip attachment" aria-hidden="true"></i> -->
+      <button class="submit" (click)="sendMessage(message)">
+        <i class="fa fa-paper-plane"></i>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- <div class="message-container">
+  <div *ngFor="let message of messages" class="message" [ngClass]="{ 'sent': message.sender === currentUserID, 'received': message.sender !== currentUserID }">
+    <span>{{ message.content }}</span>
+  </div>
+</div> -->
+
+<!-- <div class="message-container">
+  <div *ngFor="let message of messages" class="message" [ngClass]="{ 'sent': message.sender === 'Me', 'received': message.sender !== 'Me' }">
+    <span>{{ message.content }}</span>
+  </div>
+</div>
+
+
+<div class="message-container">
+  <div *ngFor="let message of messages" class="message" [ngClass]="{ 'sent': message.sender === 'Me', 'received': message.sender !== 'Me' }">
+    <span>{{ message.content }}</span>
+  </div>
+</div> -->
+
+<!-- <div class="message-container">
+  <div *ngFor="let message of messages" class="message" [ngClass]="{ 'sent': message.sender === '4200', 'received': message.sender !== '4200' }">
+    <span>{{ message.content }}</span>
+  </div>
+</div>
+
+
+<div class="message-container">
+  <div *ngFor="let message of messages">
+    <span>{{ message.sender }}:</span>
+    <span>{{ message.content }}</span>
+  </div>
+  <input type="text" [(ngModel)]="message" placeholder="Type a message..." style="width: 96%;" (keyup.enter)="sendMessage()">
+  <button (click)="sendMessage()" style="width: 4%;">Send</button>
+</div> -->
